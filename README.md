@@ -1,6 +1,6 @@
 # PaddyPay
 
-<img src="images/brand/paddypay-logo.svg" alt="PaddyPay logo: rice plant, water, and carbon seal" width="540">
+<img src="images/brand/paddypay-logo.png" alt="PaddyPay logo" width="540">
 
 **Proof from the field. Payment to the farmer.** PaddyPay helps a rice cooperative track alternate wetting and drying (AWD) while the crop is growing, preserve evidence that others can check, and show each farmer's share of a simulated carbon sale.
 

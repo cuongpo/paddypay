@@ -1,6 +1,6 @@
 # PaddyPay
 
-<img src="images/brand/paddypay-logo.svg" alt="PaddyPay logo: rice plant, water, and carbon seal" width="540">
+<img src="images/brand/paddypay-logo.png" alt="PaddyPay logo" width="540">
 
 **Traceable carbon-credit evidence. Transparent rewards for rice farmers.**
 
