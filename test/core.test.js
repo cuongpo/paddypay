@@ -1,0 +1,72 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { qa3, buildScenario, scorePlot } from '../src/core.js';
+import { Gateway } from '../src/gateway.js';
+import { actionQueue, sampleWaterByCluster } from '../src/action-queue.js';
+process.env.SIM_SEED='unit-test-seed';
+
+test('QA3 matches hand calculation and uncertainty deduction',()=>{
+  const q=qa3(1);
+  assert.equal(q.baselineKg,122);
+  assert.equal(Number(q.projectKg.toFixed(1)),67.1);
+  assert.equal(Number(q.netPerHa.toFixed(3)),1.307);
+});
+test('seeded scenario covers three statuses and gateway rejects bad readings',async()=>{
+  const s=await buildScenario();
+  const repeated=await buildScenario();
+  assert.equal(s.readings[0].signature,repeated.readings[0].signature);
+  assert.equal(s.daily['A-32'].root,repeated.daily['A-32'].root);
+  assert.deepEqual(s.plots.reduce((a,p)=>(a[p.score.status]=(a[p.score.status]??0)+1,a),{}),{green:14,red:2,yellow:8});
+  assert.equal(s.plots.find(p=>p.code==='A-01').tMilli,1895);
+  const g=new Gateway(s.devices,s.plots);
+  const r=s.readings[0];
+  await g.accept(r);
+  await assert.rejects(()=>g.accept(r),/Repeated/);
+  await assert.rejects(()=>g.accept({...r,seq:r.seq+1}),/Invalid device signature/);
+  await assert.rejects(()=>g.accept({...r,device:'0x0000000000000000000000000000000000000001'}),/Unregistered/);
+  assert.equal(g.batches()[0].count,1);
+});
+test('AWD rules identify early drainage, excessive depth, missing photos and dropout',()=>{
+  const good=Array.from({length:100},(_,i)=>({day:i+1,waterLevelCm:[32,58,83].includes(i+1)?-12:4}));
+  const photos=[32,58,83].map(day=>({day,confirmedCm:-12}));
+  assert.equal(scorePlot({},good,photos).status,'green');
+  assert.match(scorePlot({},good,photos.slice(1)).reasons.join(' '),/Missing photo/);
+  assert.match(scorePlot({},good.filter(x=>x.day<47||x.day>50),photos).reasons.join(' '),/Sensor data missing/);
+  assert.match(scorePlot({},good,[...photos,{day:25,confirmedCm:-12}]).reasons.join(' '),/conflicts/);
+  assert.match(scorePlot({},good.map(x=>x.day===15?{...x,waterLevelCm:-12}:x),photos).reasons.join(' '),/drained too early/);
+  assert.match(scorePlot({},good,[{...photos[0],confirmedCm:-18},...photos.slice(1)]).reasons.join(' '),/water level too low/);
+});
+test('action queue points to the field issue and tracks follow-up evidence',async()=>{
+  const scenario=await buildScenario();
+  const water=sampleWaterByCluster(scenario);
+  const before=actionQueue(scenario.plots,scenario.photos,water);
+  assert.equal(before.length,11);
+  assert.equal(before.find(action=>action.plotCode==='A-07').kind,'photo-conflict');
+  const missingPhoto=before.find(action=>action.plotCode==='C-01'&&action.kind==='missing-photo');
+  assert.equal(missingPhoto.day,83);
+  const outage=before.find(action=>action.plotCode==='C-01'&&action.kind==='sensor-gap');
+  assert.equal(outage.kind,'sensor-gap');
+  assert.deepEqual(outage.missingDays,[47,48,49,50]);
+  assert.equal(outage.day,47);
+  assert.equal(outage.state,'open');
+  scenario.photos.push({plotCode:'C-01',day:83,confirmedCm:-12,source:'user-confirmed',imageHash:'0x1234'});
+  const c01=scenario.plots.find(plot=>plot.code==='C-01');
+  c01.score=scorePlot(c01,water.C.map(reading=>({day:reading.day,waterLevelCm:reading.cm})),scenario.photos.filter(photo=>photo.plotCode==='C-01'));
+  assert.equal(c01.score.status,'yellow');
+  assert.equal(actionQueue(scenario.plots,scenario.photos,water).some(action=>action.plotCode==='C-01'&&action.kind==='missing-photo'),false);
+  scenario.photos.push({plotCode:'C-01',day:47,source:'user-confirmed',imageHash:'0x1234'});
+  const after=actionQueue(scenario.plots,scenario.photos,water);
+  assert.equal(after.find(action=>action.plotCode==='C-01'&&action.kind==='sensor-gap').state,'evidence-added');
+  assert.equal(after.find(action=>action.plotCode==='C-01'&&action.kind==='sensor-gap').severity,'yellow');
+});
+test('missing-photo task disappears when assessment has its required photo',()=>{
+  const water=Array.from({length:100},(_,i)=>({day:i+1,waterLevelCm:[32,58,83].includes(i+1)?-12:4}));
+  const photos=[58,83].map(day=>({plotCode:'T-01',day,confirmedCm:-12,source:'simulated'}));
+  const plot={code:'T-01',cluster:'T',score:scorePlot({},water,photos)};
+  const before=actionQueue([plot],photos,{T:water});
+  assert.equal(before[0].kind,'missing-photo');
+  assert.equal(before[0].day,32);
+  photos.push({plotCode:'T-01',day:32,confirmedCm:-12,source:'user-confirmed'});
+  plot.score=scorePlot({},water,photos);
+  assert.equal(actionQueue([plot],photos,{T:water}).length,0);
+});

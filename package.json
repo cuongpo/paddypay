@@ -1,0 +1,23 @@
+{
+  "name": "paddypay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "start": "./run.sh",
+    "dev": "./run.sh dev",
+    "test": "./run.sh test",
+    "test:contracts": "./run.sh test:contracts",
+    "build:research": "node scripts/build-research.mjs",
+    "demo": "./run.sh demo",
+    "demo:kairos": "./run.sh demo:kairos",
+    "deploy:kairos": "./run.sh deploy:kairos",
+    "deploy:base": "./run.sh deploy:base"
+  },
+  "dependencies": {
+    "viem": "^2.57.10"
+  }
+}

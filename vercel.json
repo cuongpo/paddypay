@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/plot/:code", "destination": "/api/plot" },
+    { "source": "/api/receipt/:token", "destination": "/api/receipt" },
+    { "source": "/api/export.csv", "destination": "/api/export" }
+  ]
+}

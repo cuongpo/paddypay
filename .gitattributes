@@ -1,0 +1,2 @@
+# Preserve the published research CSV byte for byte.
+public/research/piezo-2023.csv -whitespace

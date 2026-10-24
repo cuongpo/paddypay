@@ -1,0 +1,9 @@
+# Only the public snapshot, API functions and static UI are deployed.
+.env
+.env.*
+!.env.example
+data/
+contracts/
+scripts/
+test/
+run.sh
