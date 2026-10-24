@@ -1,5 +1,7 @@
 # PaddyPay
 
+<img src="images/brand/paddypay-logo.svg" alt="PaddyPay logo: rice plant, water, and carbon seal" width="540">
+
 **Traceable carbon-credit evidence. Transparent rewards for rice farmers.**
 
 PaddyPay is a working demo for documenting climate-smart rice farming and showing how the resulting carbon revenue could reach farmers. It combines water-level observations, field-photo evidence, plot assessments, blockchain records, and understandable farmer receipts in one workflow. Its starting point is **alternate wetting and drying (AWD)**: periodically allowing irrigated rice fields to dry to a safe threshold before reflooding. The International Rice Research Institute (IRRI) describes AWD as a way to reduce irrigation water use by about 30% and methane emissions by 30–70% under the conditions it discusses; those are research-level outcomes, **not measured PaddyPay results**. [IRRI][irri-awd]

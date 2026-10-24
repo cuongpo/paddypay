@@ -1,5 +1,7 @@
 # PaddyPay
 
+<img src="images/brand/paddypay-logo.svg" alt="PaddyPay logo: rice plant, water, and carbon seal" width="540">
+
 **Proof from the field. Payment to the farmer.** PaddyPay helps a rice cooperative track alternate wetting and drying (AWD) while the crop is growing, preserve evidence that others can check, and show each farmer's share of a simulated carbon sale.
 
 [AWD](https://ghgmitigation.irri.org/mitigation-technologies/alternate-wetting-and-drying) periodically lets rice fields dry instead of keeping them continuously flooded, which can reduce methane emissions. The prototype tackles three questions a farmer or verifier should be able to answer: **Did this plot follow AWD? Where is the evidence? How was the farmer paid?** Signed sensor readings and water-tube photo hashes support each plot assessment. A smart contract records daily evidence roots, rejects duplicate registrations within the registry, and allocates sale proceeds by a public 70/10/20 rule.

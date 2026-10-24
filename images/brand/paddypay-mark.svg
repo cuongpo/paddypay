@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">PaddyPay symbol</title>
+  <desc id="desc">A rice plant inside a circular gold seal, rising above two water lines on a deep green square.</desc>
+  <rect x="8" y="8" width="240" height="240" rx="58" fill="#154A34"/>
+  <path d="M189 71a77 77 0 1 1-112 43" fill="none" stroke="#D7B35B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M99 190c18-7 41-7 58 0 10 4 22 4 34 0M100 205c18-7 40-7 57 0 11 4 22 4 34 0" fill="none" stroke="#9CCCB0" stroke-width="6" stroke-linecap="round"/>
+  <path d="M131 185c-2-35-3-67 10-100" fill="none" stroke="#F7F5E9" stroke-width="10" stroke-linecap="round"/>
+  <path d="M134 151c-27 0-45-13-53-38 25-2 46 11 53 38Z" fill="#90D2A0"/>
+  <path d="M137 133c27-1 45-14 51-39-25 0-43 15-51 39Z" fill="#C8E6CA"/>
+  <ellipse cx="142" cy="77" rx="8" ry="15" transform="rotate(16 142 77)" fill="#F0C96C"/>
+  <ellipse cx="158" cy="87" rx="7" ry="13" transform="rotate(45 158 87)" fill="#E6B957"/>
+  <ellipse cx="125" cy="92" rx="7" ry="13" transform="rotate(-34 125 92)" fill="#E6B957"/>
+</svg>

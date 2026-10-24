@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 280" role="img" aria-labelledby="title desc">
+  <title id="title">PaddyPay logo</title>
+  <desc id="desc">PaddyPay wordmark with a rice plant, water lines, and a circular gold seal.</desc>
+  <rect x="16" y="16" width="248" height="248" rx="60" fill="#154A34"/>
+  <path d="M202 81a80 80 0 1 1-116 45" fill="none" stroke="#D7B35B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M110 203c19-7 43-7 61 0 11 4 23 4 35 0M110 219c19-7 42-7 60 0 12 4 23 4 36 0" fill="none" stroke="#9CCCB0" stroke-width="6" stroke-linecap="round"/>
+  <path d="M144 198c-2-37-3-70 11-104" fill="none" stroke="#F7F5E9" stroke-width="11" stroke-linecap="round"/>
+  <path d="M147 163c-28 0-47-14-55-40 27-2 48 12 55 40Z" fill="#90D2A0"/>
+  <path d="M150 144c28-1 47-15 53-41-26 0-45 16-53 41Z" fill="#C8E6CA"/>
+  <ellipse cx="156" cy="86" rx="8" ry="16" transform="rotate(16 156 86)" fill="#F0C96C"/>
+  <ellipse cx="173" cy="97" rx="7" ry="14" transform="rotate(45 173 97)" fill="#E6B957"/>
+  <ellipse cx="138" cy="102" rx="7" ry="14" transform="rotate(-34 138 102)" fill="#E6B957"/>
+  <text x="302" y="155" fill="#173F2D" font-family="Manrope, Arial, sans-serif" font-size="112" font-weight="800" letter-spacing="-5"><tspan>Paddy</tspan><tspan fill="#238D5A">Pay</tspan></text>
+  <text x="308" y="205" fill="#5A8067" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800" letter-spacing="5.5">CARBON EVIDENCE · FARMER REWARDS</text>
+</svg>
